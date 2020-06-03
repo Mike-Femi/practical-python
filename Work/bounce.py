@@ -2,6 +2,8 @@
 #
 # Exercise 1.5
 
+height = 100 # (meters)
+recoil_height = 0.6 * height #(3/5 of height)
 bounce = 1
 
 
