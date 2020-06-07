@@ -16,7 +16,18 @@ while principal > 0:
         payment = 2684.11
     principal = principal * (1+rate/12) - payment
     total_paid = total_paid + payment
-    print(month, round(total_paid, 2), round(principal, 2))
+    '''print(month, round(total_paid, 2), round(principal, 2))'''
 
+
+# Exercise 1.17: Using f-strings for the output    
+    print(f'{month:4d} {total_paid:10.2f} {principal:10.2f}')
+
+
+'''
 print('Total paid =',round(total_paid, 5))
 print('Months =', month)
+'''
+
+
+
+print(f'Total paid = {total_paid:0.2f} in {month} months')
