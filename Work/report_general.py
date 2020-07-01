@@ -16,16 +16,14 @@ def read_portfolio(filename):
         rows = csv.reader(f)
         headers = next(rows)
         
-        for row in rows:
-            # holding = (row[0], int(row[1]), float(row[2]))
-            stock = {'name': row[0], 'shares': int(row[1]), 'price': float(row[2])}
-            portfolio.append(stock)
+        for rowno, row in enumerate(rows, start=1):
+            record = dict(zip(headers, row))
+            portfolio.append(record)
             
     return portfolio
 
 
 ''' Mapping names to prices from a csv file '''
-
 
 def read_prices(filename):
     prices = {}
@@ -33,7 +31,6 @@ def read_prices(filename):
         rows = csv.reader(f)
         for row in rows:
             try:
-                
                 prices[str(row[0])] = float(row[1])
             except IndexError:
                 pass
@@ -44,33 +41,20 @@ def read_prices(filename):
 portfolio = read_portfolio('Data/portfolio.csv')
 prices = read_prices('Data/prices.csv')
 
-##''' Calculating total cost of portfolio '''
-##total_cost = 0.0
-##for s in portfolio:
-##    total_cost += s['shares'] * s['price']
-##print('Total cost =', total_cost)
-##
-##''' Calculating current value of portfolio '''
-##current_value = 0.0
-##for s in portfolio:
-##    current_value += s['shares'] * prices[s['name']]
-##print('Current value =', current_value)
-##
-##''' Calculating gain/loss of the portfolio '''
-##loss = 0.0
-##gain = 0.0
-##if total_cost > current_value:
-##    loss = total_cost - current_value
-##    print('Loss =', loss)
-##else:
-##    gain = current_value - total_cost
-##    print('Gain =', gain)
-
+''' Using prices from another file to calculate changes in prices of stock
+    from portfolio '''
 def make_report(portfolio, prices):
     table = []
     for s in portfolio:
-        row = (s['name'], s['shares'], prices[s['name']], prices[s['name']] - s['price'])
-        table.append(row)
+        try:
+            name = s['name']
+            shares = int(s['shares'])
+            price = float(s['price'])
+            change = prices[name] - float(price)
+            line = (name, shares, price, change)
+            table.append(line)
+        except KeyError:
+            print('key is missing')
     return table
 
 report = make_report(portfolio, prices)
@@ -83,5 +67,6 @@ print(('-' * 10 + ' ') * len(headers))
 for table in report:
     print('%10s %10d %10.2f %10.2f' % table)
 
+''' Alternate Output '''
 ##for name, shares, price, change in report:
 ##    print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
