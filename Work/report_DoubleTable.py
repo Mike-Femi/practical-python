@@ -82,4 +82,18 @@ def portfolio_report(portfolio_filename, prices_filename):
     # Call the print out function
     print_report(report)
 
-portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+#portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+
+
+
+
+
+
+#portfolio_report('Data/portfolio2.csv', 'Data/prices.csv')
+
+files = ['Data/portfolio.csv', 'Data/portfolio2.csv']
+
+for name in files:
+	print(f'{name:-^43s}')
+	portfolio_report(name, 'Data/prices.csv')
+	print()
