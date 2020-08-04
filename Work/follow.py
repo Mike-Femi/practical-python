@@ -10,12 +10,7 @@ def follow(filename):
             if line == '':
                 time.sleep(0.1)   # Sleep briefly and retry
                 continue
-            fields = line.split(',')
-            name = fields[0].strip('"')
-            price = float(fields[1])
-            change = float(fields[4])
-            if change < 0:
-                print(f'{name:>10s} {price:>10.2f} {change:>10.2f}')
+            yield line
 
 
 if __name__ == '__main__':
@@ -24,9 +19,9 @@ if __name__ == '__main__':
     portfolio = report.read_portfolio('Data/portfolio.csv')
 
     for line in follow('Data/stocklog.csv'):
-        fields = line.split(',')
-        name = fields[0].strip('"')
-        price = float(fields[1])
-        change = float(fields[4])
+        row = line.split(',')
+        name = row[0].strip('"')
+        price = float(row[1])
+        change = float(row[4])
         if name in portfolio:
             print(f'{name:>10s} {price:>10.2f} {change:>10.2f}')
