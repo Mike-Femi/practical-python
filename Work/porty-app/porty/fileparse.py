@@ -1,11 +1,11 @@
 # fileparse.py
-#
-# Exercise 3.3
 
 import os
 os.chdir('C:/Users/Mike-Femi/Desktop/practical-python/Work')
 
 import csv
+import logging
+log = logging.getLogger(__name__)
 
 def parse_csv(lines, select=None, types=None, has_headers=True, delimiter=',', silence_errors=False):
     '''
@@ -49,18 +49,9 @@ def parse_csv(lines, select=None, types=None, has_headers=True, delimiter=',', s
             if silence_errors==True:
                 pass
             else:
-                print(f'Row {rowno}: Couldn\'t convert {row}')
-                print(f'Row {rowno}: Reason {e}')
+                # print(f'Row {rowno}: Couldn\'t convert {row}')
+                log.warning("Row %d: Couldn't convert %s", rowno, row)
+                # print(f'Row {rowno}: Reason {e}')
+                log.debug("Row %d: Reason %s", rowno, e)
             
     return records
-'''
-def main(args):
-    if len(args) < 2:
-        raise SystemExit("Usage: ' lines = open('filename', 'rt')")
-        raise SystemExit("port = fileparse.parse_csv(lines, args[1] ....args[n])")
-    parse_csv()
-
-if __name__ == '__main__':
-    import sys
-    main(sys.argv)
-'''

@@ -36,7 +36,7 @@ else:
 '''
 
 
-import report
+from . import report
 
 def portfolio_cost(filename):
     '''
@@ -53,4 +53,4 @@ def main(args):
 
 if __name__ == '__main__':
     import sys
-    main(args)
+    main(sys.argv)

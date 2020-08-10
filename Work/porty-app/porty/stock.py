@@ -1,6 +1,6 @@
 # stock.py
 
-from typedproperty import String, Integer, Float
+from .typedproperty import String, Integer, Float
 
 class Stock:
     name = String('name')  # String = lambda name: typedproperty(name, str)

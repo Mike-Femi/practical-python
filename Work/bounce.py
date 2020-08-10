@@ -1,6 +1,6 @@
+#!/usr/bin/env python3
+
 # bounce.py
-#
-# Exercise 1.5
 
 height = 100 # (meters)
 recoil_height = 0.6 * height #(3/5 of height)

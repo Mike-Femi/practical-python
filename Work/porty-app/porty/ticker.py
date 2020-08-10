@@ -7,9 +7,9 @@ logfile, and table format.
 
 '''
 
-import report
-import tableformat
-from follow import follow
+from . import report
+from . import tableformat
+from .follow import follow
 import csv
 import time
  
@@ -22,7 +22,7 @@ def convert_types(rows, types):
         yield [func(val) for func, val in zip(types, row)]
 
 def make_dicts(rows, headers):
-    return (dict(zip(headers, row) for row in rows)        
+    return (dict(zip(headers, row) for row in rows))        
 
 def parse_stock_data(lines):
     rows = csv.reader(lines)
